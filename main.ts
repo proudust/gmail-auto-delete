@@ -1,5 +1,3 @@
-/// <reference path="https://raw.githubusercontent.com/proudust/deno-gas-types/main/types/index.d.ts" />
-
 import {
   difference,
   Unit,
