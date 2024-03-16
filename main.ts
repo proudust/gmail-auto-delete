@@ -1,8 +1,5 @@
-import {
-  difference,
-  Unit,
-} from "https://deno.land/std@0.155.0/datetime/mod.ts";
-import { sortBy } from "https://deno.land/std@0.155.0/collections/sort_by.ts";
+import { difference, Unit } from "@std/datetime";
+import { sortBy } from "@std/collections";
 
 declare let global: {
   doGet: (e?: GoogleAppsScript.Events.DoGet) =>

@@ -1,10 +1,10 @@
 import { GasPlugin } from "esbuild-gas-plugin";
 import { denoPlugins } from "@luca/esbuild-deno-loader";
-import { parse } from "https://deno.land/std@0.155.0/flags/mod.ts";
+import { parseArgs } from "@std/cli";
 import { build, type Plugin } from "https://deno.land/x/esbuild@v0.20.0/mod.js";
 import { $ } from "https://deno.land/x/dax@0.39.2/mod.ts";
 
-const command = parse(Deno.args, {})._[0] || "build";
+const command = parseArgs(Deno.args, {})._[0] || "build";
 switch (command) {
   case "build": {
     await Promise.all([

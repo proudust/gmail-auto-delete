@@ -10,10 +10,15 @@
   ],
   "imports": {
     "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.10.3",
+    "@std/assert": "jsr:@std/assert@^0.213.1",
+    "@std/cli": "jsr:@std/cli@^0.213.1",
+    "@std/collections": "jsr:@std/collections@^0.213.1",
+    "@std/datetime": "jsr:@std/datetime@^0.213.1",
     "esbuild-gas-plugin": "npm:esbuild-gas-plugin@^0.8.0"
   },
   "tasks": {
     "build": "deno run --allow-env --allow-net --allow-read --allow-run --allow-write _build.ts",
-    "deploy": "deno task build && deno task build deploy"
+    "deploy": "deno task build && deno task build deploy",
+    "lock": "(rm deno.lock || true) && deno cache --reload *.ts **/*.ts npm:@google/clasp@2.4.2"
   }
 }
