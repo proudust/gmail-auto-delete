@@ -8,6 +8,9 @@
     "dist",
     "node_modules"
   ],
+  "imports": {
+    "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.10.3"
+  },
   "tasks": {
     "build": "deno run --allow-env --allow-net --allow-read --allow-run --allow-write _build.ts",
     "deploy": "deno task build && deno task build deploy"
