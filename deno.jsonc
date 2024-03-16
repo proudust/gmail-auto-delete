@@ -9,7 +9,8 @@
     "node_modules"
   ],
   "imports": {
-    "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.10.3"
+    "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.10.3",
+    "esbuild-gas-plugin": "npm:esbuild-gas-plugin@^0.8.0"
   },
   "tasks": {
     "build": "deno run --allow-env --allow-net --allow-read --allow-run --allow-write _build.ts",
