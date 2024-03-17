@@ -4,6 +4,7 @@
     "specifiers": {
       "jsr:@luca/esbuild-deno-loader@^0.10.3": "jsr:@luca/esbuild-deno-loader@0.10.3",
       "jsr:@std/assert@^0.213.1": "jsr:@std/assert@0.213.1",
+      "jsr:@std/assert@^0.220.1": "jsr:@std/assert@0.220.1",
       "jsr:@std/cli@^0.213.1": "jsr:@std/cli@0.213.1",
       "jsr:@std/collections@^0.213.1": "jsr:@std/collections@0.213.1",
       "jsr:@std/datetime@^0.213.1": "jsr:@std/datetime@0.213.1",
@@ -12,6 +13,7 @@
       "jsr:@std/json@^0.213.1": "jsr:@std/json@0.213.1",
       "jsr:@std/jsonc@0.213": "jsr:@std/jsonc@0.213.1",
       "jsr:@std/path@0.213": "jsr:@std/path@0.213.1",
+      "jsr:@std/path@^0.220.1": "jsr:@std/path@0.220.1",
       "npm:@google/clasp@2.4.2": "npm:@google/clasp@2.4.2_inquirer@8.2.6",
       "npm:esbuild-gas-plugin@^0.8.0": "npm:esbuild-gas-plugin@0.8.0"
     },
@@ -29,6 +31,9 @@
         "dependencies": [
           "jsr:@std/fmt@^0.213.1"
         ]
+      },
+      "@std/assert@0.220.1": {
+        "integrity": "88710d54f3afdd7a5761e7805abba1f56cd14e4b212feffeb3e73a9f77482425"
       },
       "@std/cli@0.213.1": {
         "integrity": "d8114963ecfe11f411373af88256f0a2810c80219b8544c8f90f9fa8937e88fd",
@@ -62,6 +67,12 @@
         "integrity": "f187bf278a172752e02fcbacf6bd78a335ed320d080a7ed3a5a59c3e88abc673",
         "dependencies": [
           "jsr:@std/assert@^0.213.1"
+        ]
+      },
+      "@std/path@0.220.1": {
+        "integrity": "cc63c1b5e5192e2f718dc2f365a3514fffb26cc0380959bab0f8fb5988a52f0c",
+        "dependencies": [
+          "jsr:@std/assert@^0.220.1"
         ]
       }
     },
@@ -1979,6 +1990,7 @@
       "jsr:@std/cli@^0.213.1",
       "jsr:@std/collections@^0.213.1",
       "jsr:@std/datetime@^0.213.1",
+      "jsr:@std/path@^0.220.1",
       "npm:esbuild-gas-plugin@^0.8.0"
     ]
   }

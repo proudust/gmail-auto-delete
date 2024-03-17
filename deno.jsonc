@@ -14,6 +14,7 @@
     "@std/cli": "jsr:@std/cli@^0.213.1",
     "@std/collections": "jsr:@std/collections@^0.213.1",
     "@std/datetime": "jsr:@std/datetime@^0.213.1",
+    "@std/path": "jsr:@std/path@^0.220.1",
     "esbuild-gas-plugin": "npm:esbuild-gas-plugin@^0.8.0"
   },
   "tasks": {
