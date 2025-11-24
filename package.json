@@ -1,6 +1,6 @@
 {
   "private": true,
   "devDependencies": {
-    "@google/clasp": "^2.5.0"
+    "@google/clasp": "^3.1.3"
   }
 }
