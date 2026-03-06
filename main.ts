@@ -13,17 +13,10 @@ declare let global: {
   [key: string]: () => void;
 };
 
-interface Options {
-  [labelName: string]:
-    | {
-      target: "date";
-      unit: Unit;
-      diff: number;
-    }
-    | {
-      target: "duplicates";
-      count: number;
-    };
+interface DeleteConfig {
+  type: "keepFor" | "keepLatest";
+  unit?: Unit;
+  value: number;
 }
 
 function trashIfDateLater(
@@ -64,28 +57,45 @@ function trashIfDuplicates(
     });
 }
 
-global.gmailAutoDelete = () => {
-  const options: Options = JSON.parse(
-    PropertiesService
-      .getScriptProperties()
-      .getProperty("OPTIONS") || "{}",
+export function parseLabel(labelName: string): DeleteConfig | null {
+  // Parse AutoDelete/KeepFor-{count}{unit} format
+  const keepForMatch = labelName.match(
+    /^AutoDelete\/KeepFor-(\d+)(days|weeks|months|years)$/,
   );
+  if (keepForMatch) {
+    return {
+      type: "keepFor",
+      value: parseInt(keepForMatch[1]),
+      unit: keepForMatch[2] as Unit,
+    } as const;
+  }
 
-  Object.keys(options).forEach((labelName) => {
-    const label = GmailApp.getUserLabelByName(labelName);
-    const option = options[labelName];
+  // Parse AutoDelete/KeepLatest(-{count})? format (count is optional, defaults to 1)
+  const keepLatestMatch = labelName.match(
+    /^AutoDelete\/KeepLatest(?:-(\d+))?$/,
+  );
+  if (keepLatestMatch) {
+    return {
+      type: "keepLatest",
+      value: keepLatestMatch[1] ? parseInt(keepLatestMatch[1]) : 1,
+    } as const;
+  }
 
-    switch (option.target) {
-      case "date": {
-        const { unit, diff } = option;
-        trashIfDateLater(label, unit, diff);
-        return;
-      }
-      case "duplicates": {
-        const { count } = option;
-        trashIfDuplicates(label, count);
-        return;
-      }
+  return null;
+}
+
+global.gmailAutoDelete = () => {
+  GmailApp.getUserLabels().forEach((label) => {
+    const labelName = label.getName();
+    const config = parseLabel(labelName);
+    if (!config) return;
+
+    console.log(`Find label: "${labelName}" -> ${JSON.stringify(config)}`);
+
+    if (config.type === "keepFor") {
+      trashIfDateLater(label, config.unit!, config.value);
+    } else if (config.type === "keepLatest") {
+      trashIfDuplicates(label, config.value);
     }
   });
 };
