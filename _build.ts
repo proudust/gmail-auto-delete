@@ -1,10 +1,10 @@
-import gasPlugin from "https://cdn.esm.sh/esbuild-gas-plugin@0.4.0/mod.ts";
-import httpPlugin from "https://deno.land/x/esbuild_plugin_http_fetch@v1.0.3/index.js";
-import { parse } from "https://deno.land/std@0.155.0/flags/mod.ts";
-import { build } from "https://deno.land/x/esbuild@v0.12.15/mod.js";
-import { $ } from "https://deno.land/x/zx_deno@1.2.2/mod.mjs";
+import { GasPlugin } from "esbuild-gas-plugin";
+import { denoPlugin } from "@deno/esbuild-plugin";
+import { parseArgs } from "@std/cli";
+import { build, type Plugin } from "esbuild";
+import { $ } from "@david/dax";
 
-const command = parse(Deno.args, {})._[0] || "build";
+const command = parseArgs(Deno.args, {})._[0] || "build";
 switch (command) {
   case "build": {
     await Promise.all([
@@ -15,8 +15,8 @@ switch (command) {
         outfile: "dist/out.js",
         target: "es2017", // Workaround for jquery/esprima#2034
         plugins: [
-          httpPlugin,
-          gasPlugin,
+          denoPlugin(),
+          GasPlugin as unknown as Plugin,
         ],
       }),
       (async function copy() {
@@ -29,7 +29,7 @@ switch (command) {
   }
 
   case "deploy": {
-    await $`npx clasp push -f`;
+    await $`deno run --allow-env --allow-net --allow-read --allow-sys @google/clasp push -f`;
     break;
   }
 

@@ -1,10 +1,7 @@
 /// <reference path="https://raw.githubusercontent.com/proudust/deno-gas-types/main/types/index.d.ts" />
 
-import {
-  difference,
-  Unit,
-} from "https://deno.land/std@0.155.0/datetime/mod.ts";
-import { sortBy } from "https://deno.land/std@0.155.0/collections/sort_by.ts";
+import { sortBy } from "@std/collections";
+import { difference, Unit } from "@std/datetime";
 
 declare let global: {
   doGet: (e?: GoogleAppsScript.Events.DoGet) =>
